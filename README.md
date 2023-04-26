@@ -1,13 +1,45 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+## Car Shop
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Car Shop é um projeto back-end onde foram utilizados Typescript e MongoDB junto com Mongoose para realizar o CRUD.
+
+É possível cadastrar um veículo, seja ele um carro ou motocicleta, atualizá-lo, filtrar pelo seu ID, listar todos e deletar do Banco de Dados. O projeto contem também testes unitários usando Chai e Sinon.
+
+## Apredizados com este projeto
+
+- Typescript
+- POO
+- Mongoose
+- MongoDB
+- Docker
+- Sinon
+- Chai
+
+
+
+## Instalação
+
+Caso queira instalar o projeto e dar uma olhada mais de perto.
+
+```bash
+1. Clonando o projeto
+  git clone git@github.com:WillianDutra/car-shop.git
+
+2. Entrando na pasta
+  cd car-shop
+
+3. Instalando as dependências
+  npm install
+
+4. Iniciando docker
+  docker-compose up -d
+
+5. Crie uma conexão na extensão do MongoDB com a URL:
+  mongodb://localhost:27017
+```
+Após a configuração é só fazer as requisições a partir da url: `http://localhost:3001`
+
+- `/cars` - GET e POST.
+-  `/cars/:id` - GET, PUT e DELETE.
+- `/motorcycles` - GET e POST.
+- `/motorcycles/:id` - GET, PUT e DELETE.
