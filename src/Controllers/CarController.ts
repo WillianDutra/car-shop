@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import ICar from '../Interfaces/ICar';
 import CarService from '../Services/CarService';
 
+import STATUS from '../Utils/StatusCode';
+
 export default class CarController {
   private req: Request;
   private res: Response;
@@ -21,7 +23,7 @@ export default class CarController {
 
     try {
       const newCar = await this.service.create(car);
-      return this.res.status(201).json(newCar);
+      return this.res.status(STATUS.CREATED).json(newCar);
     } catch (error) {
       this.next(error);
     }
@@ -30,7 +32,7 @@ export default class CarController {
   public async getAll() {
     try {
       const carList = await this.service.getAll();
-      return this.res.status(200).json(carList);
+      return this.res.status(STATUS.OK).json(carList);
     } catch (error) {
       this.next(error);
     }
@@ -40,7 +42,7 @@ export default class CarController {
     const { id } = this.req.params;
     try {
       const carFiltered = await this.service.getById(id);
-      return this.res.status(200).json(carFiltered);
+      return this.res.status(STATUS.OK).json(carFiltered);
     } catch (error) {
       this.next(error);
     }
@@ -52,7 +54,7 @@ export default class CarController {
 
     try {
       const carUpdated = await this.service.update(id, carData);
-      return this.res.status(200).json(carUpdated);
+      return this.res.status(STATUS.OK).json(carUpdated);
     } catch (error) {
       this.next(error);
     }

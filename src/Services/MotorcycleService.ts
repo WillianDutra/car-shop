@@ -1,10 +1,10 @@
-// import { isValidObjectId } from 'mongoose';
+import { isValidObjectId } from 'mongoose';
 import MotorcycleODM from '../Models/MotorcycleODM';
 import Motorcycle from '../Domains/Motorcycle';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 
-// import ErrorWithStatus from '../Middlewares/ErrorWithStatus';
-// import ErrorTypes from '../Utils/ErrorCode';
+import ErrorWithStatus from '../Middlewares/ErrorWithStatus';
+import STATUS from '../Utils/StatusCode';
 
 export default class MotorcycleService {
   private createMotorcycleDomain(motorcycleData: IMotorcycle | null): Motorcycle | null {
@@ -15,19 +15,37 @@ export default class MotorcycleService {
     return null;
   }
 
-  // private validateId(id: string): void {
-  //   if (!isValidObjectId(id)) {
-  //     throw new ErrorWithStatus('Invalid mongo id', ErrorTypes.INVALID_VALUE);
-  //   }
-  // }
+  private validateId(id: string): void {
+    if (!isValidObjectId(id)) {
+      throw new ErrorWithStatus('Invalid mongo id', STATUS.INVALID_VALUE);
+    }
+  }
 
-  // private notFound(): void {
-  //   throw new ErrorWithStatus('Car not found', ErrorTypes.NOT_FOUND);
-  // }
+  private notFound(): void {
+    throw new ErrorWithStatus('Motorcycle not found', STATUS.NOT_FOUND);
+  }
 
   public async create(data: IMotorcycle) {
     const motorcycleODM = new MotorcycleODM();
     const newMotorcycle = await motorcycleODM.create(data);
     return this.createMotorcycleDomain(newMotorcycle);
+  }
+
+  public async getAll() {
+    const motorcycleODM = new MotorcycleODM();
+    const motorcycleList = await motorcycleODM.getAll();
+    return motorcycleList.map((motorcycle) => this.createMotorcycleDomain(motorcycle));
+  }
+
+  public async getById(id: string) {
+    this.validateId(id);
+
+    const motorcycleODM = new MotorcycleODM();
+    const motorcycleFiltered = await motorcycleODM.getById(id);
+    if (motorcycleFiltered) {
+      return this.createMotorcycleDomain(motorcycleFiltered);
+    }
+
+    this.notFound();
   }
 }

@@ -3,7 +3,7 @@ import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import ErrorWithStatus from '../Middlewares/ErrorWithStatus';
 import CarODM from '../Models/CarODM';
-import ErrorTypes from '../Utils/ErrorCode';
+import STATUS from '../Utils/StatusCode';
 
 export default class CarService {
   private createCarDomain(carData: ICar | null): Car | null {
@@ -16,12 +16,12 @@ export default class CarService {
 
   private validateId(id: string): void {
     if (!isValidObjectId(id)) {
-      throw new ErrorWithStatus('Invalid mongo id', ErrorTypes.INVALID_VALUE);
+      throw new ErrorWithStatus('Invalid mongo id', STATUS.INVALID_VALUE);
     }
   }
 
   private notFound(): void {
-    throw new ErrorWithStatus('Car not found', ErrorTypes.NOT_FOUND);
+    throw new ErrorWithStatus('Car not found', STATUS.NOT_FOUND);
   }
 
   public async create(data: ICar) {

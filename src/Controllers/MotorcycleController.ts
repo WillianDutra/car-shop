@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import MotorcycleService from '../Services/MotorcycleService';
 
+import STATUS from '../Utils/StatusCode';
+
 export default class MotorcycleController {
   private req: Request;
   private res: Response;
@@ -23,7 +25,26 @@ export default class MotorcycleController {
 
     try {
       const newMotorcycle = await this.service.create(motorcycle);
-      return this.res.status(201).json(newMotorcycle);
+      return this.res.status(STATUS.CREATED).json(newMotorcycle);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getAll() {
+    try {
+      const motorcycleList = await this.service.getAll();
+      return this.res.status(STATUS.OK).json(motorcycleList);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getById() {
+    const { id } = this.req.params;
+    try {
+      const motorcycleFiltered = await this.service.getById(id);
+      return this.res.status(STATUS.OK).json(motorcycleFiltered);
     } catch (error) {
       this.next(error);
     }
