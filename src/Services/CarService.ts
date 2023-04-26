@@ -58,4 +58,16 @@ export default class CarService {
 
     this.notFound();
   }
+
+  public async delete(id: string) {
+    this.validateId(id);
+
+    const carODM = new CarODM();
+    const { deletedCount } = await carODM.delete(id);
+    if (deletedCount !== 0) {
+      return null;
+    }
+
+    this.notFound();
+  }
 } 
