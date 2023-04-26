@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import sinon from 'sinon';
 
 import CarService from '../../../src/Services/CarService';
-import { inputValue, carId, carList, carWithId } from './CarServices.mock';
+import { inputValue, carId, carList, carWithId, deleteOutput } from './CarServices.mock';
 
 describe('Testa a camada Service de Car', function () {
   describe('Casos de SUCESSO', function () {
@@ -45,6 +45,16 @@ describe('Testa a camada Service de Car', function () {
       const result = await service.update(carId.id, inputValue);
       // Assert
       expect(result).to.be.deep.equal(carWithId);
+    });
+
+    it('Consegue deletar um carro cadastrado', async function () {
+      // Arrange
+      sinon.stub(Model, 'deleteOne').resolves({ ...deleteOutput });
+      // Act
+      const service = new CarService();
+      const result = await service.delete(carId.id);
+      // Assert
+      expect(result).to.be.deep.equal(null);
     });
   });
 

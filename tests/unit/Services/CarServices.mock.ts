@@ -1,3 +1,5 @@
+export const deleteOutput = { n: 1, ok: 1, deletedCount: 1, acknowledged: true };
+
 export const inputValue = {
   model: 'Gol bolinha',
   year: 2000,

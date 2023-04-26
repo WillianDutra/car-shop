@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 import MotorcycleService from '../../../src/Services/MotorcycleService';
 import {
-  inputValue, motorcycleId, motorcycleList, motorcycleWithId,
+  inputValue, motorcycleId, motorcycleList, motorcycleWithId, deleteOutput,
 } from './MotorcycleService.mock';
 
 describe('Testa a camada Service de Motorcycle', function () {
@@ -47,6 +47,16 @@ describe('Testa a camada Service de Motorcycle', function () {
       const result = await service.update(motorcycleId.id, inputValue);
       // Assert
       expect(result).to.be.deep.equal(motorcycleWithId);
+    });
+
+    it('Consegue deletar uma motocicleta cadastrada', async function () {
+      // Arrange
+      sinon.stub(Model, 'deleteOne').resolves({ ...deleteOutput });
+      // Act
+      const service = new MotorcycleService();
+      const result = await service.delete(motorcycleId.id);
+      // Assert
+      expect(result).to.be.deep.equal(null);
     });
   });
 
