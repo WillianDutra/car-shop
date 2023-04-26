@@ -7,7 +7,7 @@ import IMotorcycle from '../Interfaces/IMotorcycle';
 // import ErrorTypes from '../Utils/ErrorCode';
 
 export default class MotorcycleService {
-  private createCarDomain(motorcycleData: IMotorcycle | null): Motorcycle | null {
+  private createMotorcycleDomain(motorcycleData: IMotorcycle | null): Motorcycle | null {
     if (motorcycleData) {
       const { id, model, year, color, status, buyValue, category, engineCapacity } = motorcycleData;
       return new Motorcycle({ id, model, year, color, status, buyValue, category, engineCapacity });
@@ -28,6 +28,6 @@ export default class MotorcycleService {
   public async create(data: IMotorcycle) {
     const motorcycleODM = new MotorcycleODM();
     const newMotorcycle = await motorcycleODM.create(data);
-    return this.createCarDomain(newMotorcycle);
+    return this.createMotorcycleDomain(newMotorcycle);
   }
 }
