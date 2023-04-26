@@ -48,4 +48,16 @@ export default class MotorcycleService {
 
     this.notFound();
   }
+
+  public async update(id: string, motorcycleData: IMotorcycle) {
+    this.validateId(id);
+
+    const motorcycleODM = new MotorcycleODM();
+    const motorcycleUpdated = await motorcycleODM.update(id, motorcycleData);
+    if (motorcycleUpdated) {
+      return this.createMotorcycleDomain(motorcycleUpdated);
+    }
+
+    this.notFound();
+  }
 }

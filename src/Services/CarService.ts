@@ -52,9 +52,10 @@ export default class CarService {
     this.validateId(id);
 
     const carODM = new CarODM();
-    const car = await carODM.update(id, carData);
-    if (car) {
-      return this.createCarDomain(car);
+    const carUpdated = await carODM.update(id, carData);
+    // console.log(carUpdated);
+    if (carUpdated) {
+      return this.createCarDomain(carUpdated);
     }
 
     this.notFound();
