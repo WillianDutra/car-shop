@@ -6,12 +6,11 @@ import CarODM from '../Models/CarODM';
 import STATUS from '../Utils/StatusCode';
 
 export default class CarService {
-  private createCarDomain(carData: ICar | null): Car | null {
+  private createCarDomain(carData: ICar | null): Car | void {
     if (carData) {
       const { id, model, year, color, status, buyValue, doorsQty, seatsQty } = carData;
       return new Car({ id, model, year, color, status, buyValue, doorsQty, seatsQty });
     }
-    return null;
   }
 
   private validateId(id: string): void {
@@ -53,7 +52,6 @@ export default class CarService {
 
     const carODM = new CarODM();
     const carUpdated = await carODM.update(id, carData);
-    // console.log(carUpdated);
     if (carUpdated) {
       return this.createCarDomain(carUpdated);
     }
