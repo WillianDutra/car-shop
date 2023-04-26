@@ -64,8 +64,8 @@ export default class CarController {
     const { id } = this.req.params;
     
     try {
-      const deleteCar = await this.service.delete(id);
-      return this.res.status(STATUS.NO_CONTENT).json(deleteCar);
+      await this.service.delete(id);
+      return this.res.status(STATUS.NO_CONTENT).json();
     } catch (error) {
       this.next(error);
     }

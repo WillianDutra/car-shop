@@ -59,4 +59,16 @@ export default class MotorcycleService {
 
     this.notFound();
   }
+
+  public async delete(id: string) {
+    this.validateId(id);
+
+    const motorcycleODM = new MotorcycleODM();
+    const { deletedCount } = await motorcycleODM.delete(id);
+    if (deletedCount !== 0) {
+      return null;
+    }
+
+    this.notFound();
+  }
 }
