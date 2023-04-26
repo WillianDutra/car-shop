@@ -7,12 +7,11 @@ import ErrorWithStatus from '../Middlewares/ErrorWithStatus';
 import STATUS from '../Utils/StatusCode';
 
 export default class MotorcycleService {
-  private createMotorcycleDomain(motorcycleData: IMotorcycle | null): Motorcycle | null {
+  private createMotorcycleDomain(motorcycleData: IMotorcycle | null): Motorcycle | void {
     if (motorcycleData) {
       const { id, model, year, color, status, buyValue, category, engineCapacity } = motorcycleData;
       return new Motorcycle({ id, model, year, color, status, buyValue, category, engineCapacity });
     }
-    return null;
   }
 
   private validateId(id: string): void {
