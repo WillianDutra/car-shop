@@ -5,7 +5,7 @@ Car Shop é um projeto back-end onde foram utilizados Typescript e MongoDB junto
 
 É possível cadastrar um veículo, seja ele um carro ou motocicleta, atualizá-lo, filtrar pelo seu ID, listar todos e deletar do Banco de Dados. O projeto contem também testes unitários usando Chai e Sinon.
 
-## Apredizados com este projeto
+## Aprendizados com este projeto
 
 - Typescript
 - POO
